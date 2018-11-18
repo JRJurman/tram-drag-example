@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('Poppins-Light.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Poppins';
+  background: aliceblue;
+}
+
+.draggable-container {
+  width: 100%;
+  height: calc(100vh - 8em);
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 7px;
+  touch-action: none;
+}
+
+.draggable {
+  width: 156px;
+  height: 218px;
+  background-color: rgb(245, 230, 99);
+  border: 10px solid rgba(136, 136, 136, .5);
+  touch-action: none;
+  user-select: none;
+}
+
+.draggable:active {
+  background-color: rgba(168, 218, 220, 1.00);
+}
+
+.draggable:hover {
+  cursor: pointer;
+  border: 10px solid rgba(255, 255, 255, 0.886);
+}
