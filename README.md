@@ -1,5 +1,8 @@
 # tram-drag-example
 
+This is a DOM drag example, based on https://www.kirupa.com/html5/drag.htm
+![](public/tram-drag-example.gif)
+
 ## Development instructions
 1. In the root directory, run `npm install` to install all the project dependencies
 2. Run `npm start` to start the dev server
