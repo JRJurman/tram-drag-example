@@ -7,6 +7,6 @@ module.exports = (attrs, children) => {
                 rotate(${attrs.x/40}deg);
   `
   return html`
-    <div class="draggable" style=${itemStyle} />
+    <div class="draggable" style=${itemStyle} card=${attrs.card} />
   `
 }

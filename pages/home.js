@@ -2,8 +2,12 @@ const Tram = require('tram-one')
 const html = Tram.html({
   'app-header': require('../elements/app-header'),
   'drag-container': require('../elements/drag-container'),
-  'drag-item': require('../elements/drag-item')
+  'card': require('../elements/card')
 })
+
+const getCardIndex = event => {
+  return parseInt(event.target.attributes.card.value)
+}
 
 const getXY = event => {
   return event.type === "touchstart" ?
@@ -18,8 +22,9 @@ module.exports = (store, actions) => {
 
   const onDragStart = event => {
     if (!event.target.className.split(' ').includes('draggable')) return
+    const cardIndex = getCardIndex(event)
     const {x, y} = getXY(event)
-    actions.dragStart({x, y})
+    actions.dragStart({cardIndex, x, y})
   }
 
   const onDragEnd = event => {
@@ -27,8 +32,13 @@ module.exports = (store, actions) => {
   }
 
   const onDrag = event => {
+    // only drag if there is a card that is active
+    const cardIndex = store.cards
+      .map(card => card.active)
+      .indexOf(true)
+    if (cardIndex === -1) return
     const {x, y} = getXY(event)
-    actions.drag({x, y})
+    actions.drag({cardIndex, x, y})
   }
 
   return html`
@@ -36,7 +46,9 @@ module.exports = (store, actions) => {
       <app-header color=${store.color} onclick=${advanceColor} />
       <drag-container
         ondragstart=${onDragStart} ondragend=${onDragEnd} ondrag=${onDrag}>
-        <drag-item x=${store.drag.currentX} y=${store.drag.currentY}/>
+        <card card=0 x=${store.cards[0].currentX} y=${store.cards[0].currentY}/>
+        <card card=1 x=${store.cards[1].currentX} y=${store.cards[1].currentY}/>
+        <card card=2 x=${store.cards[2].currentX} y=${store.cards[2].currentY}/>
       </drag-container>
     </div>
   `
